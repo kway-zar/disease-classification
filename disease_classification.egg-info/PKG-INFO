@@ -1,0 +1,76 @@
+Metadata-Version: 2.4
+Name: disease-classification
+Version: 0.0.1
+Summary: Streamlit component that allows you to do X
+Author-email: kway-zar <jgdcruz06@gmail.com>
+License-Expression: Apache-2.0
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: streamlit>=1.51
+Provides-Extra: devel
+Requires-Dist: wheel; extra == "devel"
+Requires-Dist: pytest==7.4.0; extra == "devel"
+Requires-Dist: playwright==1.48.0; extra == "devel"
+Requires-Dist: requests==2.31.0; extra == "devel"
+Requires-Dist: pytest-playwright-snapshot==1.0; extra == "devel"
+Requires-Dist: pytest-rerunfailures==12.0; extra == "devel"
+Dynamic: license-file
+
+# disease-classification
+
+Streamlit component that allows you to do X
+
+## Installation instructions
+
+```sh
+uv pip install disease-classification
+```
+
+### Development install (editable)
+
+When developing this component locally, install it in editable mode so Streamlit picks up code changes without rebuilding a wheel. Run this from the directory that contains `pyproject.toml`:
+
+```sh
+uv pip install -e . --force-reinstall
+```
+
+## Usage instructions
+
+```python
+import streamlit as st
+
+from disease_classification import disease_classification
+
+value = disease_classification()
+
+st.write(value)
+```
+
+## Build a wheel
+
+To package this component for distribution:
+
+1. Build the frontend assets (from `disease_classification/frontend`):
+
+   ```sh
+   npm i
+   npm run build
+   ```
+
+2. Build the Python wheel using UV (from the project root):
+   ```sh
+   uv build
+   ```
+
+This will create a `dist/` directory containing your wheel. The wheel includes the compiled frontend from `disease_classification/frontend/build`.
+
+### Requirements
+
+- Python >= 3.10
+- Node.js >= 24 (LTS)
+
+### Expected output
+
+- `dist/disease_classification-0.0.1-py3-none-any.whl`
+- If you run `uv run --with build python -m build` (without `--wheel`), you’ll also get an sdist: `dist/disease-classification-0.0.1.tar.gz`

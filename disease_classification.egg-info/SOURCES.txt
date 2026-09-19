@@ -1,0 +1,12 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+disease_classification/pyproject.toml
+disease_classification.egg-info/PKG-INFO
+disease_classification.egg-info/SOURCES.txt
+disease_classification.egg-info/dependency_links.txt
+disease_classification.egg-info/requires.txt
+disease_classification.egg-info/top_level.txt
+disease_classification/frontend/build/index-DBuV6-4W.js
+disease_classification/frontend/build/index-DBuV6-4W.js.map
