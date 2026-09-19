@@ -1,0 +1,8 @@
+# Ship a minimal metadata file that can be picked up by Streamlit at runtime.
+[project]
+name = "disease-classification"
+version = "0.0.1"
+
+[[tool.streamlit.component.components]]
+name = "disease_classification"
+asset_dir = "frontend/build"

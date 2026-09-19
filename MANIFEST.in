@@ -1,0 +1,2 @@
+recursive-include disease_classification/frontend/build *
+include pyproject.toml
