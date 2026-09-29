@@ -11,7 +11,7 @@ license = "Apache-2.0"
 license-files = ["LICENSE"]
 requires-python = ">=3.10"
 authors = [{ name = "kway-zar", email = "jgdcruz06@gmail.com" }]
-dependencies = ["streamlit >= 1.51"]
+dependencies = ["streamlit >= 1.51", "streamlit-shadcn-ui", "st_tailwind"]
 
 [project.optional-dependencies]
 devel = [

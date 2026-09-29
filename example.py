@@ -1,28 +1,24 @@
 import streamlit as st
+import streamlit_shadcn_ui as ui
+import st_tailwind as tw
+
 from disease_classification import disease_classification
 
 # Add some test code to play with the component while it's in development.
 # During development, we can run this just as we would any other Streamlit
 # app: `$ streamlit run disease_classification/example.py`
 
-st.subheader("Component with constant args")
-
-# Create an instance of our component with a constant `name` arg, and
-# print its output value.
-result = disease_classification("World")
-st.markdown("You've clicked %s times!" % int(result["num_clicks"]))
-
-st.markdown("---")
-st.subheader("Component with variable args")
-
-# Create a second instance of our component whose `name` arg will vary
-# based on a text_input widget.
-#
-# We use the special "key" argument to assign a fixed identity to this
-# component instance. By default, when a component's arguments change,
-# it is considered a new instance and will be re-mounted on the frontend
-# and lose its current state. In this case, we want to vary the component's
-# "name" argument without having it get recreated.
-name_input = st.text_input("Enter a name", value="Streamlit")
-result = disease_classification(name_input, key="foo")
-st.markdown("You've clicked %s times!" % int(result["num_clicks"]))
+columns = st.columns(2)
+with columns[0]:
+    ui.card(
+        title="Create project",
+        content="Start from a clean V2 component surface.",
+        description="Standard size",
+    )
+with columns[1]:
+    ui.card(
+        title="Activity",
+        content="Three components were verified today.",
+        description="Compact size",
+        size="sm",
+    )

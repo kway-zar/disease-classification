@@ -1,4 +1,6 @@
 streamlit>=1.51
+streamlit-shadcn-ui
+st_tailwind
 
 [devel]
 wheel

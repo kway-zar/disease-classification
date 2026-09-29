@@ -278,7 +278,9 @@ name = "disease-classification"
 version = "0.0.1"
 source = { editable = "." }
 dependencies = [
+    { name = "st-tailwind" },
     { name = "streamlit" },
+    { name = "streamlit-shadcn-ui" },
 ]
 
 [package.optional-dependencies]
@@ -298,7 +300,9 @@ requires-dist = [
     { name = "pytest-playwright-snapshot", marker = "extra == 'devel'", specifier = "==1.0" },
     { name = "pytest-rerunfailures", marker = "extra == 'devel'", specifier = "==12.0" },
     { name = "requests", marker = "extra == 'devel'", specifier = "==2.31.0" },
+    { name = "st-tailwind" },
     { name = "streamlit", specifier = ">=1.51" },
+    { name = "streamlit-shadcn-ui" },
     { name = "wheel", marker = "extra == 'devel'" },
 ]
 provides-extras = ["devel"]
@@ -1606,6 +1610,18 @@ wheels = [
 ]
 
 [[package]]
+name = "st-tailwind"
+version = "1.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "streamlit" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c1/81/c5cb4e932dacdb878a5e6e5593efffe402e73684fb840aeef2d1b3783988/st_tailwind-1.3.0.tar.gz", hash = "sha256:ef91d596073526dafccaf946f57db490c2111a81ba334a89f18eb1d87702e007", size = 7564, upload-time = "2024-12-23T12:44:07.794Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/33/01/b0c05f9f83d0c85610009f9a0b815cda14a854571bb4f128cbad811956fb/st_tailwind-1.3.0-py3-none-any.whl", hash = "sha256:fc666317c8a6bac708bb0177ee6204af1e25a252312cf83412bcfce983579835", size = 8170, upload-time = "2024-12-23T12:44:06.944Z" },
+]
+
+[[package]]
 name = "starlette"
 version = "1.6.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1651,6 +1667,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ce/98/399d9b5bea64f0db9a37a800e420ba563dcde293e91d244c7d96acaeb313/streamlit-1.64.0.tar.gz", hash = "sha256:5c3f9a9dec13b5c5197a9c764ebf1a9d77f9e19c1b4af008779cb45c368961a3", size = 9535360, upload-time = "2026-09-15T19:13:53.576Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d7/8e/e635448a7fd6d92211d4ff2150356b8dffd3fcdc05c00511c61110078871/streamlit-1.64.0-py3-none-any.whl", hash = "sha256:4daf63aa9eaa5452d0edc64a5bdb0c4ad25580fe3c62c270455f3c43e9db5098", size = 10093987, upload-time = "2026-09-15T19:13:51.284Z" },
+]
+
+[[package]]
+name = "streamlit-shadcn-ui"
+version = "1.4.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "streamlit" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a1/dd/dfd99881fafec55386e12003aaf8710f888a47a3087179fa4618b5b82320/streamlit_shadcn_ui-1.4.0.tar.gz", hash = "sha256:8fc076dc93937927a809ef22a50bc15ec622d9871f32ff1f921c4b4cb014ce1d", size = 460752, upload-time = "2026-09-08T11:14:58.351Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/bc/3f/786a9145eac955c2c9661e5c118c555d926fb5f0aaadf44e10258f0c248f/streamlit_shadcn_ui-1.4.0-py3-none-any.whl", hash = "sha256:82494a5795a14991ac92e46124271ee859fc50cad7364c7b6bc16b9348ec63df", size = 483201, upload-time = "2026-09-08T11:14:56.659Z" },
 ]
 
 [[package]]
