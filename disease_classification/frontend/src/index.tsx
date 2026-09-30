@@ -4,6 +4,7 @@ import {
 } from "@streamlit/component-v2-lib";
 import { StrictMode } from "react";
 import { createRoot, Root } from "react-dom/client";
+import './index.css'
 
 import MyComponent, {
   MyComponentDataShape,

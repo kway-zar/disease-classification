@@ -8,6 +8,8 @@ Requires-Python: >=3.10
 Description-Content-Type: text/markdown
 License-File: LICENSE
 Requires-Dist: streamlit>=1.51
+Requires-Dist: streamlit-shadcn-ui
+Requires-Dist: st_tailwind
 Provides-Extra: devel
 Requires-Dist: wheel; extra == "devel"
 Requires-Dist: pytest==7.4.0; extra == "devel"

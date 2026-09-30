@@ -2,6 +2,7 @@ LICENSE
 MANIFEST.in
 README.md
 pyproject.toml
+disease_classification/__init__.py
 disease_classification/pyproject.toml
 disease_classification.egg-info/PKG-INFO
 disease_classification.egg-info/SOURCES.txt
