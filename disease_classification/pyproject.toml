@@ -5,4 +5,4 @@ version = "0.0.1"
 
 [[tool.streamlit.component.components]]
 name = "disease_classification"
-asset_dir = "frontend/build"
+asset_dir = "frontend/build" 
