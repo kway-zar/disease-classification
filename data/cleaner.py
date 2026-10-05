@@ -1,8 +1,12 @@
 
+import os
+
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv("./raw/Disease_symptom_and_patient_profile_dataset.csv")
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+df = pd.read_csv(os.path.join(base_dir, "raw", "Disease_symptom_and_patient_profile_dataset.csv"))
 
 print(df.head())
 print(df.info())
@@ -31,6 +35,6 @@ df[['Blood Pressure', 'Cholesterol Level']] = df[
 df['Outcome Variable'] = df['Outcome Variable'].replace(correlationMapping)
 
 
-df.to_csv('./cleaned/cleaned.csv', index=False)
+df.to_csv(os.path.join(base_dir, "cleaned", "cleaned.csv"), index=False)
 print(df.head())
 
