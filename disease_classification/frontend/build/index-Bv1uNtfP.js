@@ -19539,7 +19539,7 @@ var require_jsx_dev_runtime = /* @__PURE__ */ __commonJSMin(((exports, module) =
 var import_client = require_client();
 var import_react = require_react();
 var import_jsx_dev_runtime = require_jsx_dev_runtime();
-var _jsxFileName$1 = "C:/Users/quasar/Documents/COMSCI/disease-classification/disease_classification/frontend/src/MyComponent.tsx";
+var _jsxFileName$1 = "/Users/rowaine/Documents/GitHub/disease-classification/disease_classification/frontend/src/MyComponent.tsx";
 /**
 * A template for creating Streamlit components with React
 *
@@ -19617,7 +19617,7 @@ var MyComponent = ({ name, setStateValue }) => {
 };
 //#endregion
 //#region src/index.tsx
-var _jsxFileName = "C:/Users/quasar/Documents/COMSCI/disease-classification/disease_classification/frontend/src/index.tsx";
+var _jsxFileName = "/Users/rowaine/Documents/GitHub/disease-classification/disease_classification/frontend/src/index.tsx";
 var reactRoots = /* @__PURE__ */ new WeakMap();
 var MyComponentRoot = (args) => {
 	const { data, parentElement, setStateValue } = args;
@@ -19652,4 +19652,4 @@ var MyComponentRoot = (args) => {
 //#endregion
 export { MyComponentRoot as default };
 
-//# sourceMappingURL=index-DBuV6-4W.js.map
+//# sourceMappingURL=index-Bv1uNtfP.js.map
