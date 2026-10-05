@@ -1,0 +1,301 @@
+Disease,Fever,Cough,Fatigue,Difficulty Breathing,Age,Gender,Blood Pressure,Cholesterol Level,Outcome Variable
+Influenza,1,0,1,1,19,0,0,1,1
+Common Cold,0,1,1,0,25,0,1,1,0
+Eczema,0,1,1,0,25,0,1,1,0
+Asthma,1,1,0,1,25,1,1,1,1
+Eczema,1,0,0,0,25,0,1,1,1
+Influenza,1,1,1,1,25,0,1,1,1
+Hyperthyroidism,0,1,0,0,28,0,1,1,0
+Asthma,1,0,0,1,28,1,2,1,1
+Allergic Rhinitis,0,1,1,0,29,0,1,0,0
+Anxiety Disorders,0,1,0,0,29,0,1,2,0
+Common Cold,0,0,0,0,29,0,0,1,0
+Diabetes,0,0,0,0,29,1,0,1,0
+Gastroenteritis,0,1,0,0,29,0,1,1,0
+Pancreatitis,1,0,0,0,29,0,2,1,0
+Rheumatoid Arthritis,0,1,1,1,29,0,2,2,0
+Depression,1,1,1,1,29,1,2,1,1
+Liver Cancer,1,1,1,1,29,0,1,1,1
+Stroke,1,1,1,1,29,0,1,1,1
+Urinary Tract Infection,1,1,1,0,29,1,2,2,1
+Dengue Fever,1,0,1,0,30,0,1,1,0
+Eczema,0,1,1,0,30,1,2,2,0
+Gastroenteritis,1,1,1,0,30,1,2,2,0
+Hepatitis,1,1,1,1,30,1,2,1,0
+Kidney Cancer,0,0,1,0,30,1,1,1,0
+Migraine,1,0,0,0,30,0,1,1,0
+Migraine,0,1,1,0,30,0,1,1,0
+Muscular Dystrophy,0,0,1,0,30,1,2,2,0
+Sinusitis,0,1,1,0,30,1,1,1,0
+Ulcerative Colitis,1,1,0,0,30,0,1,1,0
+Ulcerative Colitis,0,1,1,0,30,0,1,1,0
+Asthma,1,1,0,1,30,0,1,1,1
+Asthma,1,1,1,1,30,0,1,1,1
+Bipolar Disorder,0,0,1,0,30,0,2,2,1
+Bronchitis,1,1,0,1,30,0,0,1,1
+Bronchitis,1,1,1,1,30,1,2,2,1
+Cerebral Palsy,0,0,1,1,30,0,1,1,1
+Colorectal Cancer,0,0,1,0,30,0,1,2,1
+Eczema,1,0,0,0,30,1,2,2,1
+Hypertensive Heart Disease,0,0,1,0,30,0,2,2,1
+Influenza,1,1,1,0,30,1,2,1,1
+Influenza,1,1,1,1,30,0,1,1,1
+Multiple Sclerosis,0,0,1,0,30,0,2,2,1
+Myocardial Infarction (Heart...,1,1,1,1,30,0,2,2,1
+Urinary Tract Infection (UTI),1,0,0,0,30,0,1,1,1
+Asthma,0,0,0,1,31,1,1,0,0
+Osteoporosis,0,0,0,1,31,1,0,1,0
+Common Cold,1,0,1,1,31,1,2,2,1
+Migraine,1,0,0,0,31,0,1,1,1
+Pneumonia,1,0,1,1,32,0,2,1,1
+Allergic Rhinitis,0,0,1,0,35,0,1,0,0
+Asthma,0,1,1,1,35,0,1,2,0
+Asthma,1,1,1,1,35,0,1,1,0
+Asthma,0,1,1,1,35,0,2,1,0
+Atherosclerosis,0,0,1,0,35,1,1,1,0
+Chronic Obstructive Pulmonary...,1,1,1,1,35,1,1,1,0
+Common Cold,1,1,1,0,35,1,2,1,0
+Eczema,0,1,0,0,35,1,2,1,0
+Epilepsy,0,0,1,0,35,1,2,2,0
+Hypertension,1,1,1,0,35,0,2,1,0
+Hyperthyroidism,1,1,1,0,35,0,1,1,0
+Obsessive-Compulsive Disorde...,0,0,1,0,35,1,1,1,0
+Pneumonia,1,1,1,1,35,0,1,1,0
+Psoriasis,1,0,0,0,35,0,1,0,0
+Psoriasis,0,1,1,0,35,0,1,0,0
+Rubella,1,0,1,0,35,0,2,1,0
+Urinary Tract Infection (UTI),0,1,1,0,35,1,2,2,0
+Asthma,1,1,0,1,35,1,1,1,1
+Cirrhosis,0,0,1,0,35,0,1,2,1
+Conjunctivitis (Pink Eye),0,1,0,0,35,0,2,2,1
+Depression,0,0,1,0,35,0,1,2,1
+Gastroenteritis,1,0,1,1,35,1,0,2,1
+Hyperthyroidism,1,1,1,0,35,1,2,2,1
+Kidney Cancer,0,0,1,0,35,1,2,2,1
+Liver Cancer,0,0,1,0,35,0,2,2,1
+Liver Disease,0,0,1,0,35,1,2,2,1
+Malaria,1,0,0,0,35,1,2,2,1
+Migraine,0,1,1,0,35,1,2,2,1
+Migraine,1,0,0,0,35,1,2,2,1
+Pancreatitis,0,0,1,0,35,1,1,2,1
+Rheumatoid Arthritis,1,1,1,0,35,1,1,0,1
+Rheumatoid Arthritis,0,0,1,0,35,0,1,0,1
+Spina Bifida,0,0,1,0,35,0,1,1,1
+Ulcerative Colitis,0,0,1,0,35,1,2,2,1
+Ulcerative Colitis,1,0,0,0,35,1,2,2,1
+Urinary Tract Infection,1,0,1,0,35,0,1,2,1
+Allergic Rhinitis,0,1,0,0,38,0,0,1,0
+Depression,0,0,0,0,38,0,1,2,0
+Gastroenteritis,0,0,0,0,38,1,1,0,0
+Influenza,0,0,0,0,38,1,1,1,0
+Kidney Disease,0,0,1,0,38,0,0,1,0
+Liver Cancer,1,1,0,0,38,0,2,1,0
+Liver Disease,0,1,0,1,38,1,0,1,0
+Osteoporosis,0,1,0,0,38,0,1,2,0
+Stroke,1,1,0,0,38,0,2,1,0
+Anxiety Disorders,1,0,1,1,38,1,2,2,1
+Diabetes,1,0,1,1,38,1,2,0,1
+Migraine,1,1,0,0,38,1,2,2,1
+Osteoarthritis,1,1,1,0,38,1,2,2,1
+Pneumonia,1,1,1,1,38,1,1,1,1
+Klinefelter Syndrome,0,0,1,0,39,0,1,1,1
+Acne,0,0,1,0,40,1,1,1,0
+Brain Tumor,0,0,1,0,40,1,1,1,0
+Bronchitis,0,1,0,1,40,0,1,1,0
+Cystic Fibrosis,0,0,1,1,40,1,2,2,0
+Diabetes,1,0,0,0,40,0,2,2,0
+Glaucoma,0,0,1,0,40,1,2,1,0
+Osteoarthritis,0,0,1,0,40,1,2,1,0
+Rabies,1,1,0,0,40,0,2,1,0
+Asthma,1,0,1,0,40,1,0,1,1
+Asthma,1,1,0,1,40,0,1,1,1
+Asthma,0,0,1,1,40,1,2,2,1
+Asthma,1,0,1,1,40,1,1,2,1
+Chickenpox,0,1,0,0,40,1,1,2,1
+Coronary Artery Disease,0,0,1,0,40,0,2,2,1
+"Eating Disorders (Anorexia,...",0,0,1,0,40,0,2,2,1
+Fibromyalgia,0,0,1,0,40,0,2,2,1
+Gastroenteritis,1,1,1,0,40,1,2,2,1
+Hemophilia,0,0,1,0,40,0,1,1,1
+Hyperthyroidism,0,0,1,0,40,1,2,2,1
+Hypoglycemia,0,0,1,0,40,0,2,2,1
+Lymphoma,0,1,0,0,40,0,1,2,1
+Pneumonia,1,1,1,1,40,0,1,2,1
+Psoriasis,0,1,1,0,40,1,2,1,1
+Psoriasis,1,0,0,0,40,1,2,1,1
+Psoriasis,0,1,0,0,40,0,1,2,1
+Tuberculosis,1,1,1,1,40,1,2,2,1
+Anxiety Disorders,0,0,0,0,42,1,0,1,0
+Common Cold,1,1,0,0,42,0,2,2,0
+Depression,1,0,0,1,42,1,2,1,0
+Influenza,0,1,0,0,42,0,1,2,0
+Kidney Cancer,1,0,0,0,42,0,1,1,0
+Liver Cancer,1,0,1,1,42,1,1,0,0
+Liver Disease,1,0,0,1,42,0,1,1,0
+Lung Cancer,1,0,1,1,42,1,1,0,0
+Migraine,1,1,1,0,42,1,2,2,0
+Osteoarthritis,0,0,1,0,42,1,1,0,0
+Stroke,1,0,1,0,42,1,1,0,0
+Urinary Tract Infection,0,1,1,1,42,0,1,0,0
+Diabetes,1,1,1,0,42,1,2,1,1
+Hypothyroidism,1,1,1,0,42,0,2,2,1
+Kidney Disease,1,0,1,0,42,0,2,0,1
+Pneumonia,0,1,1,1,43,0,2,1,1
+Allergic Rhinitis,0,1,1,0,45,1,2,1,0
+Autism Spectrum Disorder (ASD),0,0,1,0,45,1,1,1,0
+Crohn's Disease,1,0,1,0,45,1,2,1,0
+Hepatitis,1,0,1,0,45,0,2,2,0
+Hyperglycemia,0,0,1,0,45,1,1,1,0
+Kidney Cancer,0,1,1,1,45,1,1,0,0
+Kidney Disease,1,1,0,0,45,1,1,2,0
+Melanoma,1,0,1,0,45,1,2,1,0
+Migraine,0,0,0,0,45,0,0,1,0
+Ovarian Cancer,0,0,1,0,45,1,1,1,0
+Pancreatitis,0,1,1,1,45,1,1,0,0
+Rheumatoid Arthritis,1,0,0,0,45,1,1,1,0
+Stroke,0,0,1,0,45,1,1,1,0
+Turner Syndrome,0,0,1,0,45,1,2,2,0
+Urinary Tract Infection,0,0,0,0,45,0,0,1,0
+Zika Virus,0,1,1,0,45,0,2,2,0
+Allergic Rhinitis,1,1,1,0,45,1,2,1,1
+Anxiety Disorders,1,1,1,0,45,1,2,1,1
+Asthma,1,1,0,1,45,1,1,1,1
+Cataracts,0,0,1,0,45,0,1,2,1
+Crohn's Disease,0,0,1,0,45,0,2,2,1
+Crohn's Disease,1,1,1,0,45,0,2,2,1
+Depression,0,0,1,0,45,0,2,2,1
+Diabetes,1,0,1,0,45,0,2,2,1
+Diabetes,0,1,1,0,45,1,1,2,1
+Hypertension,1,0,1,0,45,1,1,2,1
+Hypothyroidism,0,0,1,0,45,0,2,2,1
+Liver Disease,1,1,1,0,45,0,1,2,1
+Multiple Sclerosis,1,0,0,0,45,0,2,2,1
+Osteoarthritis,1,0,1,1,45,1,2,1,1
+Osteoporosis,1,1,1,0,45,0,1,2,1
+Pneumocystis Pneumonia (PCP),1,1,1,0,45,0,2,2,1
+Pneumonia,1,1,1,1,45,1,2,2,1
+Scoliosis,0,0,0,0,45,0,2,2,1
+Sickle Cell Anemia,0,0,1,0,45,0,1,1,1
+Tetanus,0,0,1,0,45,1,1,2,1
+Hypertension,0,0,0,0,48,0,0,2,0
+Hypothyroidism,0,0,1,0,48,1,1,2,0
+Allergic Rhinitis,1,0,0,0,50,1,2,2,0
+Anemia,0,0,1,0,50,1,1,1,0
+Anxiety Disorders,0,0,1,0,50,1,1,1,0
+Cholera,1,0,1,1,50,0,2,2,0
+Crohn's Disease,1,1,1,0,50,1,1,2,0
+Crohn's Disease,0,0,1,0,50,1,1,2,0
+Depression,0,1,1,0,50,0,0,0,0
+Diabetes,0,1,0,0,50,1,1,2,0
+Endometriosis,1,0,0,0,50,1,2,1,0
+Hypertension,0,1,0,0,50,0,1,0,0
+Hypothyroidism,1,1,1,0,50,1,1,2,0
+Kidney Cancer,0,1,0,0,50,1,0,2,0
+Kidney Disease,0,1,0,1,50,1,1,1,0
+Pancreatitis,0,1,0,0,50,1,0,2,0
+Rheumatoid Arthritis,0,1,0,0,50,0,0,1,0
+Sepsis,1,1,1,0,50,1,1,1,0
+Sleep Apnea,1,0,1,1,50,1,2,2,0
+Urinary Tract Infection,1,1,0,1,50,1,2,1,0
+Asthma,1,1,1,1,50,0,1,2,1
+Bronchitis,1,1,1,1,50,1,2,2,1
+Down Syndrome,0,0,1,0,50,0,2,2,1
+Ebola Virus,1,1,1,1,50,1,1,1,1
+Eczema,0,1,0,0,50,0,2,2,1
+Gastroenteritis,1,1,1,1,50,0,2,1,1
+Klinefelter Syndrome,0,0,1,0,50,0,1,1,1
+Liver Cancer,0,1,1,1,50,1,2,2,1
+Lyme Disease,1,0,0,0,50,1,1,2,1
+Pancreatic Cancer,0,0,1,0,50,0,2,2,1
+Pneumothorax,0,0,1,1,50,0,2,2,1
+Stroke,0,1,1,1,50,1,2,2,1
+Ulcerative Colitis,0,1,1,0,50,0,1,2,1
+Hypertension,1,1,0,0,52,1,1,0,0
+Multiple Sclerosis,0,1,1,0,52,1,1,1,0
+Appendicitis,1,0,1,0,55,1,1,1,0
+Bronchitis,0,0,1,1,55,1,2,2,0
+Bronchitis,1,1,1,1,55,1,2,1,0
+Common Cold,1,0,1,1,55,1,1,0,0
+Diabetes,0,1,0,0,55,0,1,2,0
+Esophageal Cancer,0,0,1,0,55,1,1,1,0
+HIV/AIDS,1,0,0,0,55,0,2,2,0
+Hypertension,0,1,0,0,55,0,1,0,0
+Liver Disease,0,1,1,0,55,1,2,0,0
+Marfan Syndrome,0,0,1,0,55,1,2,2,0
+Migraine,0,1,1,1,55,0,1,0,0
+Osteoporosis,0,0,1,0,55,1,2,1,0
+Parkinson's Disease,0,0,1,0,55,0,1,0,0
+Anxiety Disorders,1,1,0,0,55,0,1,0,1
+Coronary Artery Disease,0,0,1,0,55,0,1,1,1
+Hemorrhoids,0,0,0,0,55,0,2,2,1
+Hypertension,1,0,1,0,55,1,2,1,1
+Hypothyroidism,0,0,1,0,55,0,2,2,1
+Osteoarthritis,1,1,0,0,55,0,2,2,1
+Osteoporosis,1,0,1,1,55,1,2,0,1
+Osteoporosis,0,1,1,0,55,0,1,1,1
+Osteoporosis,1,0,1,0,55,0,1,1,1
+Polycystic Ovary Syndrome (PCOS),1,1,0,0,55,0,1,1,1
+Systemic Lupus Erythematosus...,0,1,1,0,55,0,2,2,1
+Typhoid Fever,0,1,0,0,55,1,1,0,1
+Influenza,1,1,1,1,56,1,2,2,1
+Pneumonia,1,1,0,1,57,1,1,2,0
+Breast Cancer,0,0,1,0,60,1,2,2,0
+Coronary Artery Disease,1,1,0,0,60,1,2,2,0
+Hyperthyroidism,0,0,1,0,60,1,1,1,0
+Measles,1,1,0,0,60,0,2,1,0
+Osteoarthritis,0,1,0,1,60,0,1,1,0
+Osteomyelitis,0,0,1,0,60,1,1,1,0
+Osteoporosis,1,0,0,0,60,1,2,2,0
+Osteoporosis,0,1,0,0,60,1,2,2,0
+Polio,1,1,1,0,60,1,1,1,0
+Asthma,1,1,1,1,60,0,2,2,1
+Chronic Kidney Disease,0,0,1,0,60,0,1,2,1
+Hemophilia,0,0,1,0,60,0,1,1,1
+Hepatitis B,0,1,1,0,60,1,1,0,1
+Hypertension,0,0,1,0,60,0,2,1,1
+Hypertension,1,0,1,0,60,1,2,1,1
+Hypertension,0,0,0,0,60,0,2,2,1
+Kidney Cancer,1,1,1,0,60,0,2,1,1
+Kidney Disease,1,1,1,1,60,0,2,2,1
+Osteoporosis,1,0,1,0,60,1,2,1,1
+Pancreatitis,1,1,1,0,60,0,2,1,1
+Parkinson's Disease,1,1,0,0,60,1,2,1,1
+Prader-Willi Syndrome,0,0,1,0,60,0,1,1,1
+Rheumatoid Arthritis,0,0,1,0,60,0,2,2,1
+Thyroid Cancer,0,0,1,0,60,0,2,2,1
+Tuberculosis,1,1,1,0,60,0,2,2,1
+Bladder Cancer,0,0,1,0,65,1,1,1,0
+Diabetes,0,0,1,0,65,1,1,2,0
+Otitis Media (Ear Infection),1,1,1,0,65,1,1,1,0
+Stroke,1,0,1,0,65,0,2,0,0
+Tourette Syndrome,0,0,1,0,65,1,2,2,0
+Urinary Tract Infection (UTI),1,0,1,0,65,1,2,1,0
+Alzheimer's Disease,0,1,0,0,65,1,1,2,1
+Alzheimer's Disease,0,0,1,0,65,0,2,2,1
+Bronchitis,1,0,1,1,65,1,2,2,1
+Chronic Obstructive Pulmonary Disease (COPD),1,0,1,1,65,0,2,2,1
+Dementia,0,0,1,0,65,0,2,2,1
+Diabetes,1,1,1,0,65,0,1,2,1
+Diverticulitis,0,0,1,0,65,0,2,2,1
+Liver Cancer,1,1,1,0,65,0,2,2,1
+Lung Cancer,1,1,1,0,65,0,2,2,1
+Lung Cancer,1,0,1,0,65,0,1,2,1
+Mumps,0,0,1,0,65,1,1,2,1
+Osteoporosis,0,1,1,0,65,0,2,2,1
+Stroke,1,1,1,0,65,0,2,2,1
+Alzheimer's Disease,1,0,1,0,70,0,2,1,0
+Cholecystitis,0,0,1,0,70,1,1,1,0
+Chronic Obstructive Pulmonary Disease (COPD),0,1,1,1,70,1,1,2,0
+Osteoporosis,1,0,0,0,70,1,1,1,0
+Parkinson's Disease,0,0,1,0,70,1,1,1,0
+Prostate Cancer,1,1,0,0,70,1,2,1,0
+Schizophrenia,0,1,1,0,70,1,1,1,0
+Gout,1,0,1,0,70,0,1,2,1
+Migraine,0,0,1,0,70,0,1,1,1
+Stroke,0,1,0,0,70,1,1,2,1
+Testicular Cancer,0,0,1,0,70,0,2,2,1
+Tonsillitis,1,1,1,0,70,0,2,2,1
+Williams Syndrome,0,0,1,0,70,0,1,1,1
+Stroke,1,0,1,0,80,0,2,2,1
+Stroke,1,0,1,0,85,1,2,2,1
+Stroke,1,0,1,0,90,0,2,2,1
