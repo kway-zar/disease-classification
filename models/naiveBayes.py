@@ -64,3 +64,4 @@ def trainAndEvaluateMixedNB(df):
 if __name__ == "__main__":
         data = importData()
         trainAndEvaluateMixedNB(data)
+ 
