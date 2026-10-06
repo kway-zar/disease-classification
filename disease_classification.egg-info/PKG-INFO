@@ -10,6 +10,7 @@ License-File: LICENSE
 Requires-Dist: streamlit>=1.51
 Requires-Dist: streamlit-shadcn-ui
 Requires-Dist: st_tailwind
+Requires-Dist: scikit-learn>=1.2
 Provides-Extra: devel
 Requires-Dist: wheel; extra == "devel"
 Requires-Dist: pytest==7.4.0; extra == "devel"
@@ -48,6 +49,18 @@ value = disease_classification()
 
 st.write(value)
 ```
+
+### Prepare healthcare data for classification
+
+Install the project dependencies, then run:
+
+```sh
+python data/prepare_healthcare.py
+```
+
+This creates `data/cleaned/healthcare_model_ready/train.csv`, `test.csv`, and
+`preprocessor.pkl`. The feature columns are numeric and scaled for KNN and
+other scikit-learn classifiers; `Disease` remains the target column.
 
 ## Build a wheel
 

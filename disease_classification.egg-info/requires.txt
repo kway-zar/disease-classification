@@ -1,6 +1,7 @@
 streamlit>=1.51
 streamlit-shadcn-ui
 st_tailwind
+scikit-learn>=1.2
 
 [devel]
 wheel
