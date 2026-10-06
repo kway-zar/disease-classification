@@ -7,7 +7,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 
 def importData():
-    url = "../data/cleaned/Training.csv"
+    url = "../data/raw/mergedData.csv"
     balance_data = pd.read_csv(url, header=0)
     print("Dataset Length:", len(balance_data))
     print("Dataset Shape:", balance_data.shape)
