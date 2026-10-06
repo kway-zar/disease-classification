@@ -65,3 +65,4 @@ if __name__ == "__main__":
     # # Test different k values
     # k_values = [1, 3, 5, 7, 9]
     # test_different_k_values(X_train, y_train, X_test, y_test, scaler, k_values)
+
