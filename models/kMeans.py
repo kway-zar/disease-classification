@@ -4,10 +4,10 @@ import pandas as pd
 from sklearn.metrics import (confusion_matrix, accuracy_score, classification_report)
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, LabelEncoder
 
 def importData():
-    url = "../data/cleaned/cleaned.csv"
+    url = "../data/cleaned/Training.csv"
     balance_data = pd.read_csv(url, header=0)
     print("Dataset Length:", len(balance_data))
     print("Dataset Shape:", balance_data.shape)
@@ -15,9 +15,14 @@ def importData():
     return balance_data
 
 def splitDataset(balance_data):
-    X = balance_data.iloc[:, 1:9].values
-    Y = balance_data['Outcome Variable'].to_numpy()
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=100, stratify=Y)
+    balance_data = balance_data.drop(columns=['Unnamed: 133'], errors='ignore')
+    feature_data = balance_data.drop("prognosis",axis=1)
+    X = feature_data.to_numpy()
+    le = LabelEncoder()
+    Y = balance_data['prognosis']
+
+    Y = le.fit_transform(Y)
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=100)
     return X, Y, X_train, X_test, y_train, y_test
 
 def train_using_knn(X_train, y_train, k=5):
@@ -57,6 +62,6 @@ if __name__ == "__main__":
     y_pred = prediction(X_test, knn, scaler)
     cal_accuracy(y_test, y_pred)
     
-    # Test different k values
-    k_values = [1, 3, 5, 7, 9]
-    test_different_k_values(X_train, y_train, X_test, y_test, scaler, k_values)
+    # # Test different k values
+    # k_values = [1, 3, 5, 7, 9]
+    # test_different_k_values(X_train, y_train, X_test, y_test, scaler, k_values)
