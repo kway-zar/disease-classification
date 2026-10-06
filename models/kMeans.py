@@ -11,8 +11,8 @@ def importData():
     csv_path = (
         Path(__file__).resolve().parents[1]
         / "data"
-        / "cleaned"
-        / "Healthcare_Processed.csv"
+        / "raw"
+        / "mergedData.csv"
     )
     data = pd.read_csv(csv_path)
     print("Dataset Length:", len(data))
@@ -22,8 +22,8 @@ def importData():
 
 
 def splitDataset(data):
-    features = data.drop(columns=["Patient_ID", "Disease"])
-    disease_labels = data["Disease"]
+    features = data.drop(columns=["prognosis"])
+    disease_labels = data["prognosis"]
     X_train, X_test, y_train, y_test = train_test_split(
         features,
         disease_labels,
@@ -41,7 +41,7 @@ def train_using_kmeans(features, disease_labels, n_clusters=None):
     if n_clusters is None:
         n_clusters = disease_labels.nunique()
 
-    kmeans = KMeans(n_clusters=n_clusters, random_state=100, n_init=10)
+    kmeans = KMeans(n_clusters=n_clusters, random_state=100, n_init=4)
     cluster_labels = kmeans.fit_predict(features_scaled)
     cluster_disease = (
         pd.DataFrame(

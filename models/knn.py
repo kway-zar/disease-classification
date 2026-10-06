@@ -22,7 +22,7 @@ def splitDataset(balance_data):
     Y = balance_data['prognosis']
 
     Y = le.fit_transform(Y)
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.4, random_state=100)
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=100)
     return X, Y, X_train, X_test, y_train, y_test
 
 def train_using_knn(X_train, y_train, k=5):
