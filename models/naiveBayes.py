@@ -1,9 +1,6 @@
-import os
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
 
 from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
@@ -11,7 +8,7 @@ from sklearn.preprocessing import OrdinalEncoder
 from sklearn.naive_bayes import GaussianNB, CategoricalNB
 
 def importData():
-    url = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "cleaned", "cleaned.csv")
+    url = "../data/cleaned/Training.csv"
     balance_data = pd.read_csv(url, header=0)
     print("Dataset Length:", len(balance_data))
     print("Dataset Shape:", balance_data.shape)
