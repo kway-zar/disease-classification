@@ -1,62 +1,90 @@
-import numpy as np
-import pandas as pd
+from pathlib import Path
 
-from sklearn.metrics import (confusion_matrix, accuracy_score, classification_report)
+import pandas as pd
+from sklearn.cluster import KMeans
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 
+
 def importData():
-    url = "../data/cleaned/cleaned.csv"
-    balance_data = pd.read_csv(url, header=0)
-    print("Dataset Length:", len(balance_data))
-    print("Dataset Shape:", balance_data.shape)
-    print("Dataset Head:", balance_data.head())
-    return balance_data
+    csv_path = (
+        Path(__file__).resolve().parents[1]
+        / "data"
+        / "raw"
+        / "mergedData.csv"
+    )
+    data = pd.read_csv(csv_path)
+    print("Dataset Length:", len(data))
+    print("Dataset Shape:", data.shape)
+    print("Dataset Head:\n", data.head())
+    return data
 
-def splitDataset(balance_data):
-    X = balance_data.iloc[:, 1:9].values
-    Y = balance_data['Outcome Variable'].to_numpy()
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=100, stratify=Y)
-    return X, Y, X_train, X_test, y_train, y_test
 
-def train_using_knn(X_train, y_train, k=5):
+def splitDataset(data):
+    features = data.drop(columns=["prognosis"])
+    disease_labels = data["prognosis"]
+    X_train, X_test, y_train, y_test = train_test_split(
+        features,
+        disease_labels,
+        test_size=0.2,
+        random_state=100,
+        stratify=disease_labels,
+    )
+    return X_train, X_test, y_train, y_test
+
+
+def train_using_kmeans(features, disease_labels, n_clusters=None):
     scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train)
-    
-    knn = KNeighborsClassifier(n_neighbors=k)
-    knn.fit(X_train_scaled, y_train)
-    
-    return knn, scaler
+    features_scaled = scaler.fit_transform(features)
 
-def prediction(X_test, knn, scaler):
-    X_test_scaled = scaler.transform(X_test)
-    y_pred = knn.predict(X_test_scaled)
-    print("Predicted Values: \n", y_pred)
-    
-    return y_pred
+    if n_clusters is None:
+        n_clusters = disease_labels.nunique()
+
+    kmeans = KMeans(n_clusters=n_clusters, random_state=100, n_init=4)
+    cluster_labels = kmeans.fit_predict(features_scaled)
+    cluster_disease = (
+        pd.DataFrame(
+            {"cluster": cluster_labels, "disease": disease_labels.to_numpy()}
+        )
+        .groupby("cluster")["disease"]
+        .agg(lambda labels: labels.mode().iloc[0])
+        .to_dict()
+    )
+
+    return kmeans, scaler, cluster_disease
+
+
+def prediction(features, kmeans, scaler, cluster_disease):
+    features_scaled = scaler.transform(features)
+    cluster_labels = kmeans.predict(features_scaled)
+    predicted_diseases = pd.Series(cluster_labels, index=features.index).map(
+        cluster_disease
+    )
+    if predicted_diseases.isna().any():
+        raise ValueError(
+            "Some predicted clusters do not have a corresponding disease label."
+        )
+    print("Predicted Diseases:\n", predicted_diseases.to_numpy())
+    return predicted_diseases
+
 
 def cal_accuracy(y_test, y_pred):
-    print("\nConfusion Matrix: \n", confusion_matrix(y_test, y_pred))
-    print("\nAccuracy: ", accuracy_score(y_test, y_pred) * 100 )
-    print("\nClassification Report: \n", classification_report(y_test, y_pred))
+    print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
+    accuracy = accuracy_score(y_test, y_pred)
+    print("\nAccuracy:", accuracy * 100)
+    print(
+        "\nClassification Report:\n",
+        classification_report(y_test, y_pred, zero_division=0),
+    )
+    return accuracy
 
-def test_different_k_values(X_train, y_train, X_test, y_test, scaler, k_values):
-        print(f"\nTesting different k values for KNN:")
-        for k in k_values:
-            knn, scaler = train_using_knn(X_train, y_train, k)
-            y_pred = prediction(X_test, knn, scaler)
-            cal_accuracy(y_test, y_pred)
 
 if __name__ == "__main__":
     data = importData()
-    X, Y, X_train, X_test, y_train, y_test = splitDataset(data)
-    
-    # Train KNN with default k=5
-    knn, scaler = train_using_knn(X_train, y_train)
-    y_pred = prediction(X_test, knn, scaler)
+    X_train, X_test, y_train, y_test = splitDataset(data)
+
+    print("\n Training using K-Means")
+    kmeans, scaler, cluster_disease = train_using_kmeans(X_train, y_train)
+    y_pred = prediction(X_test, kmeans, scaler, cluster_disease)
     cal_accuracy(y_test, y_pred)
-    
-    # Test different k values
-    k_values = [1, 3, 5, 7, 9]
-    test_different_k_values(X_train, y_train, X_test, y_test, scaler, k_values)

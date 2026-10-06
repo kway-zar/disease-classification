@@ -5,13 +5,15 @@ from pandas.core.common import random_state
 from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.preprocessing import LabelEncoder
 
 import matplotlib.pyplot as plt
 
 
 def importData():
-    url = "../data/cleaned/cleaned.csv"
+    url = "../data/raw/mergedData.csv"
     balance_data = pd.read_csv(url, header=0)
+    balance_data = balance_data.drop(columns=['Unnamed: 133'], errors='ignore')
     print("Dataset Length:", len(balance_data))
     print("Dataset Shape:", balance_data.shape)
     print("Dataset Head:", balance_data.head())
@@ -19,19 +21,22 @@ def importData():
 
 
 def splitdataset(balance_data):
-    X = balance_data.iloc[:, 1:9].to_numpy()
-    Y = balance_data['Outcome Variable'].to_numpy()
+    feature_data = balance_data.drop("prognosis",axis=1)
+    X = feature_data.to_numpy()
+    le = LabelEncoder()
+    Y = balance_data['prognosis']
+    Y = le.fit_transform(Y)
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=100)
     return X, Y, X_train, X_test, y_train, y_test
 
 def train_using_gini(X_train, y_train):
-    clf_gini = DecisionTreeClassifier(criterion="gini")
+    clf_gini = DecisionTreeClassifier(criterion="gini", random_state = 42)
     clf_gini.fit(X_train, y_train)
     
     return clf_gini
 
 def train_using_entropy(X_train, y_train):
-    clf_entropy = DecisionTreeClassifier(criterion="entropy")
+    clf_entropy = DecisionTreeClassifier(criterion="entropy", random_state = 42)
     clf_entropy.fit(X_train, y_train)
 
     return clf_entropy
