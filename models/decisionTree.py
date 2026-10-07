@@ -30,13 +30,13 @@ def splitdataset(balance_data):
     return X, Y, X_train, X_test, y_train, y_test
 
 def train_using_gini(X_train, y_train):
-    clf_gini = DecisionTreeClassifier(criterion="gini", random_state = 42)
+    clf_gini = DecisionTreeClassifier(criterion="gini", random_state = 100)
     clf_gini.fit(X_train, y_train)
     
     return clf_gini
 
 def train_using_entropy(X_train, y_train):
-    clf_entropy = DecisionTreeClassifier(criterion="entropy", random_state = 42)
+    clf_entropy = DecisionTreeClassifier(criterion="entropy", random_state = 100)
     clf_entropy.fit(X_train, y_train)
 
     return clf_entropy
