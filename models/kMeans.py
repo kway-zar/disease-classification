@@ -41,7 +41,7 @@ def train_using_kmeans(features, disease_labels, n_clusters=None):
     if n_clusters is None:
         n_clusters = disease_labels.nunique()
 
-    kmeans = KMeans(n_clusters=n_clusters, random_state=100, n_init=4)
+    kmeans = KMeans(n_clusters=n_clusters, random_state=100, n_init=1)
     cluster_labels = kmeans.fit_predict(features_scaled)
     cluster_disease = (
         pd.DataFrame(

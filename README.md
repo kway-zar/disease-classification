@@ -55,3 +55,27 @@ This will create a `dist/` directory containing your wheel. The wheel includes t
 
 - `dist/disease_classification-0.0.1-py3-none-any.whl`
 - If you run `uv run --with build python -m build` (without `--wheel`), you’ll also get an sdist: `dist/disease-classification-0.0.1.tar.gz`
+
+### Results
+- Decision Tree:
+    ```sh
+     Gini: 100%
+     Entropy: 100%
+
+    ```
+- Bernoulli Naive Bayes:
+    ```sh
+    Accuracy:100%
+    ```
+- KMeans:
+    ```sh
+    n=4 Accuracy:97.48%
+    n=10 Accuracy: 97.48%
+
+    ```
+- KNN:
+    ```sh
+    k=5 Accuracy: 100%
+    k=10 Accuracy: 99.70%
+    ```
+
