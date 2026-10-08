@@ -2,17 +2,18 @@ from pathlib import Path
 
 import pandas as pd
 from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-
+import plotly.express as px
 
 def importData():
     csv_path = (
         Path(__file__).resolve().parents[1]
         / "data"
-        / "cleaned"
-        / "Healthcare_Processed.csv"
+        / "raw"
+        / "mergedData.csv"
     )
     data = pd.read_csv(csv_path)
     print("Dataset Length:", len(data))
@@ -20,10 +21,12 @@ def importData():
     print("Dataset Head:\n", data.head())
     return data
 
-
 def splitDataset(data):
-    features = data.drop(columns=["Patient_ID", "Disease"])
-    disease_labels = data["Disease"]
+    features = data.drop(columns=["prognosis"])
+
+
+    disease_labels = data["prognosis"]
+    print('no of labels:', data["prognosis"].nunique())
     X_train, X_test, y_train, y_test = train_test_split(
         features,
         disease_labels,
@@ -79,6 +82,38 @@ def cal_accuracy(y_test, y_pred):
     )
     return accuracy
 
+def scatterPlot(features, disease_labels, kmeans, scaler, cluster_disease):
+    features_scaled = scaler.transform(features)
+    pca = PCA(n_components=3, random_state=100)
+    components_3d = pca.fit_transform(features_scaled)
+
+    cluster_ids = kmeans.predict(features_scaled)
+    mapped_diseases = pd.Series(cluster_ids).map(cluster_disease)
+
+    plot_df = pd.DataFrame(
+        components_3d, 
+        columns=["PCA1", "PCA2", "PCA3"], 
+        index=features.index
+    )
+
+    plot_df["Cluster ID"] = cluster_ids.astype(str)
+    plot_df["Assigned Cluster Disease"] = mapped_diseases
+    plot_df["Actual Disease"] = disease_labels
+
+    fig = px.scatter_3d(
+        plot_df,
+        x="PCA1",
+        y="PCA2",
+        z="PCA3",
+        color="Assigned Cluster Disease",
+        hover_data=["Cluster ID", "Actual Disease"],
+        title="3D K-Means Symptom Clusters (Labeled by Assigned Disease)",
+        opacity=0.7,
+        width=900,
+        height=700,
+    )
+
+    fig.show()
 
 if __name__ == "__main__":
     data = importData()
@@ -88,3 +123,4 @@ if __name__ == "__main__":
     kmeans, scaler, cluster_disease = train_using_kmeans(X_train, y_train)
     y_pred = prediction(X_test, kmeans, scaler, cluster_disease)
     cal_accuracy(y_test, y_pred)
+    scatterPlot(X_train, y_train, kmeans, scaler, cluster_disease)
