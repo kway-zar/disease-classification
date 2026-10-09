@@ -5,11 +5,13 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+import plotly.express as px
 import plotly.express as px
 
 def importData():
@@ -167,12 +169,7 @@ if __name__ == "__main__":
         X_train, y_train
     )
 
-    plot_kmeans_clusters_tsne(X_train_scaled, train_cluster_labels, kmeans, cluster_disease)
+plot_kmeans_clusters_tsne(X_train_scaled, train_cluster_labels, kmeans, cluster_disease)
 
-    y_pred = prediction(X_test, kmeans, scaler, cluster_disease)
-    cal_accuracy(y_test, y_pred)
-
-    print("\nTraining using K-Means")
-    kmeans, scaler, cluster_disease, _, _ = train_using_kmeans(X_train, y_train)
-    y_pred = prediction(X_test, kmeans, scaler, cluster_disease)
-    cal_accuracy(y_test, y_pred)
+y_pred = prediction(X_test, kmeans, scaler, cluster_disease)
+cal_accuracy(y_test, y_pred)
