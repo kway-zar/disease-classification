@@ -5,17 +5,12 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn.cluster import KMeans
-from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
-from sklearn.decomposition import PCA
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-import plotly.express as px
-import plotly.express as px
 
 def importData():
-    csv_path = "mergedData.csv"
     csv_path = (
         Path(__file__).resolve().parents[1]
         / "data"
