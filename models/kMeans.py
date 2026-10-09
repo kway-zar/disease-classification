@@ -3,20 +3,25 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-
+import plotly.express as px
 
 def importData():
-    csv_path = "mergedData.csv"
+    csv_path = (
+        Path(__file__).resolve().parents[1]
+        / "data"
+        / "raw"
+        / "mergedData.csv"
+    )
     data = pd.read_csv(csv_path)
     print("Dataset Length:", len(data))
     print("Dataset Shape:", data.shape)
     print("Dataset Head:\n", data.head())
     return data
-
 
 def splitDataset(data):
     features = data.drop(columns=["prognosis"])
@@ -139,6 +144,38 @@ def cal_accuracy(y_test, y_pred):
     )
     return accuracy
 
+def scatterPlot(features, disease_labels, kmeans, scaler, cluster_disease):
+    features_scaled = scaler.transform(features)
+    pca = PCA(n_components=3, random_state=100)
+    components_3d = pca.fit_transform(features_scaled)
+
+    cluster_ids = kmeans.predict(features_scaled)
+    mapped_diseases = pd.Series(cluster_ids).map(cluster_disease)
+
+    plot_df = pd.DataFrame(
+        components_3d, 
+        columns=["PCA1", "PCA2", "PCA3"], 
+        index=features.index
+    )
+
+    plot_df["Cluster ID"] = cluster_ids.astype(str)
+    plot_df["Assigned Cluster Disease"] = mapped_diseases
+    plot_df["Actual Disease"] = disease_labels
+
+    fig = px.scatter_3d(
+        plot_df,
+        x="PCA1",
+        y="PCA2",
+        z="PCA3",
+        color="Assigned Cluster Disease",
+        hover_data=["Cluster ID", "Actual Disease"],
+        title="3D K-Means Symptom Clusters (Labeled by Assigned Disease)",
+        opacity=0.7,
+        width=900,
+        height=700,
+    )
+
+    fig.show()
 
 data = importData()
 X_train, X_test, y_train, y_test = splitDataset(data)
@@ -149,6 +186,8 @@ kmeans, scaler, cluster_disease, X_train_scaled, train_cluster_labels = train_us
 )
 
 plot_kmeans_clusters_tsne(X_train_scaled, train_cluster_labels, kmeans, cluster_disease)
-
+print("\n Training using K-Means")
+kmeans, scaler, cluster_disease = train_using_kmeans(X_train, y_train)
 y_pred = prediction(X_test, kmeans, scaler, cluster_disease)
 cal_accuracy(y_test, y_pred)
+scatterPlot(X_train, y_train, kmeans, scaler, cluster_disease)
