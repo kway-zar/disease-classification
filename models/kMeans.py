@@ -11,12 +11,8 @@ from sklearn.preprocessing import StandardScaler
 import plotly.express as px
 
 def importData():
-    csv_path = (
-        Path(__file__).resolve().parents[1]
-        / "data"
-        / "raw"
-        / "mergedData.csv"
-    )
+    csv_path =  "../data/raw/mergedData.csv"
+    
     data = pd.read_csv(csv_path)
     print("Dataset Length:", len(data))
     print("Dataset Shape:", data.shape)
