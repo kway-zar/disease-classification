@@ -1,26 +1,43 @@
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn.cluster import KMeans
 from sklearn.manifold import TSNE
+from sklearn.decomposition import PCA
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-
+import plotly.express as px
 
 def importData():
     csv_path = "mergedData.csv"
+    csv_path = (
+        Path(__file__).resolve().parents[1]
+        / "data"
+        / "raw"
+        / "mergedData.csv"
+    )
     data = pd.read_csv(csv_path)
     print("Dataset Length:", len(data))
     print("Dataset Shape:", data.shape)
     print("Dataset Head:\n", data.head())
     return data
 
+def column_names(data):
+    data.columns = data.columns.str.strip()
+    return list(data.columns)
 
 def splitDataset(data):
     features = data.drop(columns=["prognosis"])
     disease_labels = data["prognosis"]
+    features = data.drop(columns=["prognosis"])
+
+
+    disease_labels = data["prognosis"]
+    print('no of labels:', data["prognosis"].nunique())
     X_train, X_test, y_train, y_test = train_test_split(
         features,
         disease_labels,
@@ -139,16 +156,23 @@ def cal_accuracy(y_test, y_pred):
     )
     return accuracy
 
+if __name__ == "__main__":
+    print("Column Names:", column_names(importData()))
 
-data = importData()
-X_train, X_test, y_train, y_test = splitDataset(data)
+    data = importData()
+    X_train, X_test, y_train, y_test = splitDataset(data)
 
-print("\n Training using K-Means...")
-kmeans, scaler, cluster_disease, X_train_scaled, train_cluster_labels = train_using_kmeans(
-    X_train, y_train
-)
+    print("\n Training using K-Means...")
+    kmeans, scaler, cluster_disease, X_train_scaled, train_cluster_labels = train_using_kmeans(
+        X_train, y_train
+    )
 
-plot_kmeans_clusters_tsne(X_train_scaled, train_cluster_labels, kmeans, cluster_disease)
+    plot_kmeans_clusters_tsne(X_train_scaled, train_cluster_labels, kmeans, cluster_disease)
 
-y_pred = prediction(X_test, kmeans, scaler, cluster_disease)
-cal_accuracy(y_test, y_pred)
+    y_pred = prediction(X_test, kmeans, scaler, cluster_disease)
+    cal_accuracy(y_test, y_pred)
+
+    print("\nTraining using K-Means")
+    kmeans, scaler, cluster_disease, _, _ = train_using_kmeans(X_train, y_train)
+    y_pred = prediction(X_test, kmeans, scaler, cluster_disease)
+    cal_accuracy(y_test, y_pred)

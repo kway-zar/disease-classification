@@ -4,13 +4,13 @@ import streamlit_shadcn_ui as ui
 import st_tailwind as tw
 
 from disease_classification import disease_classification
+from models.kMeans import importData, column_names
 
+Symptoms = [col for col in column_names(importData()) if col != "prognosis"]
 # Add some test code to play with the component while it's in development.
 # During development, we can run this just as we would any other Streamlit
 # app: `$ streamlit run disease_classification/example.py`
 st.set_page_config(layout="wide")
-
-
 
 
 tw.initialize_tailwind()
@@ -38,10 +38,10 @@ with tw.container(classes="grid grid-cols-2 gap-x-10 ring-0", height=900):
         )
         symptoms = tw.multiselect(
             "",
-            ["Python", "Java", "C++", "Rust", "Go"],
+            Symptoms,
             classes="mx-10",
             key=2,
-            default=["Python"],  # Optional: sets default selections
+            default=[Symptoms[0]],  # Optional: sets default selections
         )
     with tw.container(classes="bg-white rounded-xl shadow shadow-xl", height="stretch"):
         tw.markdown(
