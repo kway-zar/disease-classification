@@ -1,6 +1,7 @@
 from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -236,10 +237,18 @@ def importData():
     print("Dataset Head:\n", data.head())
     return data
 
+def column_names(data):
+    data.columns = data.columns.str.strip()
+    return list(data.columns)
 
 def splitDataset(data):
     features = data.drop(columns=["prognosis"])
     disease_labels = data["prognosis"]
+    features = data.drop(columns=["prognosis"])
+
+
+    disease_labels = data["prognosis"]
+    print('no of labels:', data["prognosis"].nunique())
     X_train, X_test, y_train, y_test = train_test_split(
         features,
         disease_labels,
@@ -370,6 +379,8 @@ def cal_accuracy(y_test, y_pred):
     )
     return accuracy
 
+if __name__ == "__main__":
+    print("Column Names:", column_names(importData()))
 
 def normalize_symptom_name(name):
     return "".join(character for character in name.casefold() if character.isalnum())
