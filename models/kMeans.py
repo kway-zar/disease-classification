@@ -1,4 +1,5 @@
 from pathlib import Path
+from dataclasses import dataclass
 import matplotlib
 matplotlib.use("Agg")
 
@@ -15,6 +16,15 @@ from sklearn.preprocessing import StandardScaler
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 DATASET_PATH = BASE_DIR / "data" / "raw" / "mergedData.csv"
+
+
+@dataclass
+class KMeansModel:
+    kmeans: KMeans
+    scaler: StandardScaler
+    cluster_disease: dict
+    symptom_columns: list[str]
+    validation_accuracy: float
 
 DISEASE_CATEGORIES = {
     "(vertigo) Paroymsal  Positional Vertigo": {
@@ -290,69 +300,88 @@ def evaluate_kmeans_accuracy(data):
     return accuracy_score(y_test, predictions)
 
 
-def plot_kmeans_clusters_tsne(features_scaled, cluster_labels, kmeans, cluster_disease):
-    """
-    Uses t-SNE for non-linear dimensionality reduction and projects centroids cleanly into the 2D space.
-    """
-    n_samples = features_scaled.shape[0]
+def initialize_model(data=None):
+    """Load the dataset, train K-Means, and return reusable model state."""
+    if data is None:
+        data = importData()
 
-    all_points = np.vstack([features_scaled, kmeans.cluster_centers_])
-
-    tsne = TSNE(n_components=2, perplexity=min(30, n_samples - 1), random_state=100)
-    tsne_all = tsne.fit_transform(all_points)
-
-    tsne_features = tsne_all[:n_samples]
-    tsne_centroids = tsne_all[n_samples:]
-
-    mapped_labels = np.array([f"Cluster {c}: {cluster_disease[c]}" for c in cluster_labels])
-
-    plt.figure(figsize=(14, 8))
-    sns.scatterplot(
-        x=tsne_features[:, 0],
-        y=tsne_features[:, 1],
-        hue=mapped_labels,
-        palette="tab20",
-        alpha=0.6,
-        s=80,
+    symptom_columns = data.drop(columns=["prognosis"]).columns.tolist()
+    validation_accuracy = evaluate_kmeans_accuracy(data)
+    kmeans, scaler, cluster_disease, _, _ = train_using_kmeans(
+        data[symptom_columns], data["prognosis"]
     )
-    plt.scatter(
-        tsne_centroids[:, 0],
-        tsne_centroids[:, 1],
-        c="red",
-        marker="X",
-        s=150,
-        label="Cluster Centroids",
-        edgecolor="black",
-        zorder=5,
-    )
-    for idx, (x_pos, y_pos) in enumerate(tsne_centroids):
-        plt.text(
-            x_pos,
-            y_pos,
-            f"  {idx}",
-            fontsize=9,
-            weight="bold",
-            color="black",
-            zorder=6,
-        )
-    plt.title("K-Means Clustering Visualization (2D t-SNE Projection)", fontsize=14)
-    plt.xlabel("t-SNE Dimension 1", fontsize=12)
-    plt.ylabel("t-SNE Dimension 2", fontsize=12)
-
-    # Place the legend horizontally below the plot
-    plt.legend(
-        loc="upper center",
-        bbox_to_anchor=(0.5, -0.15),
-        ncol=4,
-        borderaxespad=0.0,
-        fontsize=9
+    return KMeansModel(
+        kmeans=kmeans,
+        scaler=scaler,
+        cluster_disease=cluster_disease,
+        symptom_columns=symptom_columns,
+        validation_accuracy=validation_accuracy,
     )
 
-    plt.grid(True, linestyle="--", alpha=0.5)
-    plt.tight_layout()
-    if plt.get_backend().lower() != "agg":
-        plt.show()
-    plt.close()
+
+# def plot_kmeans_clusters_tsne(features_scaled, cluster_labels, kmeans, cluster_disease):
+#     """
+#     Uses t-SNE for non-linear dimensionality reduction and projects centroids cleanly into the 2D space.
+#     """
+#     n_samples = features_scaled.shape[0]
+
+#     all_points = np.vstack([features_scaled, kmeans.cluster_centers_])
+
+#     tsne = TSNE(n_components=2, perplexity=min(30, n_samples - 1), random_state=100)
+#     tsne_all = tsne.fit_transform(all_points)
+
+#     tsne_features = tsne_all[:n_samples]
+#     tsne_centroids = tsne_all[n_samples:]
+
+#     mapped_labels = np.array([f"Cluster {c}: {cluster_disease[c]}" for c in cluster_labels])
+
+#     plt.figure(figsize=(14, 8))
+#     sns.scatterplot(
+#         x=tsne_features[:, 0],
+#         y=tsne_features[:, 1],
+#         hue=mapped_labels,
+#         palette="tab20",
+#         alpha=0.6,
+#         s=80,
+#     )
+#     plt.scatter(
+#         tsne_centroids[:, 0],
+#         tsne_centroids[:, 1],
+#         c="red",
+#         marker="X",
+#         s=150,
+#         label="Cluster Centroids",
+#         edgecolor="black",
+#         zorder=5,
+#     )
+#     for idx, (x_pos, y_pos) in enumerate(tsne_centroids):
+#         plt.text(
+#             x_pos,
+#             y_pos,
+#             f"  {idx}",
+#             fontsize=9,
+#             weight="bold",
+#             color="black",
+#             zorder=6,
+#         )
+#     plt.title("K-Means Clustering Visualization (2D t-SNE Projection)", fontsize=14)
+#     plt.xlabel("t-SNE Dimension 1", fontsize=12)
+#     plt.ylabel("t-SNE Dimension 2", fontsize=12)
+
+#     # Place the legend horizontally below the plot
+#     plt.legend(
+#         loc="upper center",
+#         bbox_to_anchor=(0.5, -0.15),
+#         ncol=4,
+#         borderaxespad=0.0,
+#         fontsize=9
+#     )
+
+#     plt.grid(True, linestyle="--", alpha=0.5)
+#     plt.tight_layout()
+#     if plt.get_backend().lower() != "agg":
+#         plt.show()
+#     plt.close()
 
 
 def prediction(features, kmeans, scaler, cluster_disease):
@@ -390,7 +419,7 @@ def parse_symptoms(user_input, symptom_columns):
     symptom_lookup = {
         normalize_symptom_name(symptom): symptom for symptom in symptom_columns
     }
-    entered_symptoms = [symptom.strip() for symptom in user_input.split(",")]
+    entered_symptoms = user_input
     selected = []
     unknown = []
 
@@ -491,6 +520,7 @@ def summarize_match_categories(matches):
         "  By spread: Not determined; this depends on location and current "
         "outbreak data."
     )
+    return causes, courses, systems
 
 
 def show_symptom_menu(symptom_columns):
@@ -499,60 +529,22 @@ def show_symptom_menu(symptom_columns):
         print(f"  {index:>3}. {symptom.replace('_', ' ')}")
 
 
-def main():
-    data = importData()
-    symptom_columns = data.drop(columns=["prognosis"]).columns.tolist()
 
-    print("\nTraining K-Means on the available disease dataset...")
-    validation_accuracy = evaluate_kmeans_accuracy(data)
-    print(
-        "Held-out dataset accuracy (clusters mapped to their majority disease): "
-        f"{validation_accuracy:.1%}"
-    )
-    kmeans, scaler, cluster_disease, _, _ = train_using_kmeans(
-        data[symptom_columns], data["prognosis"]
-    )
+def start(user_input):
+    from .input import analyze
 
-    print(
-        "\nEnter comma-separated symptom numbers or names "
-        "(for example: 1, 2, 7 or itching, skin rash)."
-    )
-    print("Type 'list' to see numbered symptoms, or press Enter to quit.")
+    return analyze(user_input)
 
-    while True:
-        user_input = input("\nSymptoms: ").strip()
-        if not user_input:
-            break
-        if user_input.casefold() == "list":
-            show_symptom_menu(symptom_columns)
-            continue
+    # print("\nClosest disease matches (distance is not a confidence score):")
+    # for rank, (disease, distance) in enumerate(matches, start=1):
+    #     print(f"  {rank}. {disease} (relative distance: {distance:.2f})")
 
-        try:
-            symptoms = parse_symptoms(user_input, symptom_columns)
-        except ValueError as error:
-            print(error)
-            continue
-
-        matches = predict_symptom_matches(
-            symptoms,
-            symptom_columns,
-            kmeans,
-            scaler,
-            cluster_disease,
-        )
-        summarize_match_categories(matches)
-        print("\nClosest disease matches (distance is not a confidence score):")
-        for rank, (disease, distance) in enumerate(matches, start=1):
-            print(f"  {rank}. {disease} (relative distance: {distance:.2f})")
-
-        print(
-            f"\nModel held-out accuracy: {validation_accuracy:.1%}. This measures "
-            "performance on dataset records, not confidence in your result. "
-            "Distances are not probabilities. This educational tool cannot "
-            "diagnose disease; consult a qualified healthcare professional "
-            "about symptoms."
-        )
+    # print(
+    #         f"\nModel held-out accuracy: {validation_accuracy:.1%}. This measures "
+    #         "performance on dataset records, not confidence in your result. "
+    #         "Distances are not probabilities. This educational tool cannot "
+    #         "diagnose disease; consult a qualified healthcare professional "
+    #         "about symptoms."
+    #     )
 
 
-if __name__ == "__main__":
-    main()

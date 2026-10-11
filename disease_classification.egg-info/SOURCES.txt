@@ -11,4 +11,11 @@ disease_classification.egg-info/requires.txt
 disease_classification.egg-info/top_level.txt
 disease_classification/frontend/build/index-Bv1uNtfP.js
 disease_classification/frontend/build/index-Bv1uNtfP.js.map
+models/bernoulliNaiveBayes.py
+models/decisionTree.py
+models/input.py
+models/kMeans.py
+models/knn.py
+models/naiveBayes.py
+models/randomForest.py
 test/test.py

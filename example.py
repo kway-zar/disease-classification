@@ -1,52 +1,62 @@
-from pandas.core.dtypes.common import classes
 import streamlit as st
-import streamlit_shadcn_ui as ui
-import st_tailwind as tw
 
-from disease_classification import disease_classification
-from models.kMeans import importData, column_names
+from models.kMeans import initialize_model
+from models.input import analyze
 
-Symptoms = [col for col in column_names(importData()) if col != "prognosis"]
-# Add some test code to play with the component while it's in development.
-# During development, we can run this just as we would any other Streamlit
-# app: `$ streamlit run disease_classification/example.py`
+
+@st.cache_resource
+def get_model():
+    return initialize_model()
+
+
+model = get_model()
+Symptoms = model.symptom_columns
+
+
+def run_task(selected_symptoms):
+    return analyze(selected_symptoms, model)
+
 st.set_page_config(layout="wide")
 
+st.title("Disease Classification")
+st.markdown(
+    """
+    <style>
+    [data-testid="stColumn"] {
+        background: #ffffff;
+        padding: 1.25rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+input_column, results_column = st.columns(2)
 
-tw.initialize_tailwind()
-tw.write("Grid Container", classes="text-blue-500 pb-4")
+with input_column:
+    st.subheader("Select Symptoms")
+    symptoms = st.multiselect(
+        "Symptoms",
+        Symptoms,
+        key="symptoms",
+        default=[Symptoms[0]],
+    )
+    analyze_pressed = st.button("Analyze", type="primary")
 
-with tw.container(classes="grid grid-cols-2 gap-x-10 ring-0", height=900):
-    with tw.container(classes="bg-white rounded-xl shadow shadow-xl", height="stretch"):
-        tw.markdown(
-                '<p style="font-size: 3rem; font-weight:semibold;">Enter Disease</p>',
-            unsafe_allow_html=True,
-            classes="text-black mt-10 ml-10",
-        )
-        languages = tw.multiselect(
-            "",
-            ["Python", "Java", "C++", "Rust", "Go"],
-            classes="mx-10",
-            key=1,
-            default=["Python"],  # Optional: sets default selections
-        )
+with results_column:
+    st.subheader("Results")
+    if analyze_pressed:
+        summary, matches, validation_accuracy = run_task(symptoms)
+        st.write("Closest disease matches:")
+        for disease, distance in matches:
+            st.write(f"- {disease} (relative distance: {distance:.2f})")
+        st.write("Categories represented:")
+        category_names = ("By cause", "By duration/course", "By body system")
+        for category_name, category_values in zip(category_names, summary):
+            st.write(f"{category_name}:")
+            for value in sorted(category_values):
+                st.write(f"- {value}")
+        st.write(f"Model validation accuracy: {validation_accuracy:.1%}")
 
-        tw.markdown(
-            '<p style="font-size: 3rem; font-weight:semibold">Select Symptoms</p>',
-            unsafe_allow_html=True,
-            classes="text-black mt-10 ml-10",
-        )
-        symptoms = tw.multiselect(
-            "",
-            Symptoms,
-            classes="mx-10",
-            key=2,
-            default=[Symptoms[0]],  # Optional: sets default selections
-        )
-    with tw.container(classes="bg-white rounded-xl shadow shadow-xl", height="stretch"):
-        tw.markdown(
-                '<p style="font-size: 3rem; font-weight:semibold;">Results</p>',
-            unsafe_allow_html=True,
-            classes="text-black mt-10 ml-10",
-        )
 
