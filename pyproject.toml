@@ -24,7 +24,7 @@ devel = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["disease_classification*"]
+include = ["disease_classification*", "models*"]
 
 [tool.setuptools]
 include-package-data = true
