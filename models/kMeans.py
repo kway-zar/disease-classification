@@ -3,7 +3,6 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
-import seaborn as sns
 from sklearn.cluster import KMeans
 from sklearn.manifold import TSNE
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
