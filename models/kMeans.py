@@ -11,7 +11,7 @@ from sklearn.preprocessing import StandardScaler
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-DATASET_PATH = BASE_DIR / "data" / "raw" / "mergedData.csv"
+DATASET_PATH = BASE_DIR / "data" / "cleaned" / "mergedData.csv"
 
 
 @dataclass
