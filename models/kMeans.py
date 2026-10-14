@@ -11,7 +11,7 @@ from sklearn.preprocessing import StandardScaler
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-DATASET_PATH = BASE_DIR / "data" / "cleaned" / "mergedData.csv"
+DATASET_PATH = BASE_DIR / "data" / "processed" / "mergedData.csv"
 
 
 @dataclass
@@ -272,7 +272,7 @@ def train_using_kmeans(features, disease_labels, n_clusters=None):
     if n_clusters is None:
         n_clusters = disease_labels.nunique()
 
-    kmeans = KMeans(n_clusters=n_clusters, random_state=100, n_init=10)
+    kmeans = KMeans(n_clusters=n_clusters, random_state=100, n_init=1)
     cluster_labels = kmeans.fit_predict(features_scaled)
     cluster_disease = (
         pd.DataFrame(
