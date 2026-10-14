@@ -8,7 +8,7 @@ from sklearn.preprocessing import LabelEncoder
 
 
 def importData():
-    url = Path(__file__).resolve().parents[1] / "data" / "cleaned" / "mergedData.csv"
+    url = Path(__file__).resolve().parents[1] / "data" / "processed" / "mergedData.csv"
     balance_data = pd.read_csv(url, header=0)
     balance_data = balance_data.drop(columns=['Unnamed: 133'], errors='ignore')
     print("Dataset Length:", len(balance_data))
