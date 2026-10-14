@@ -155,6 +155,73 @@ st.markdown(
     [data-testid="stApp"] {
         background: linear-gradient(to bottom right, #880808 0%, #880808 65%, #4A0303 100%);
     }
+    [data-testid="stAppViewContainer"] {
+        position: relative;
+        z-index: 1;
+    }
+    .cardiogram {
+        position: fixed;
+        right: 0;
+        bottom: 2.5rem;
+        left: 0;
+        z-index: 0;
+        display: flex;
+        align-items: flex-end;
+        pointer-events: none;
+        opacity: 0.42;
+        overflow: hidden;
+    }
+    .cardiogram svg {
+        width: 200%;
+        min-width: 1800px;
+        height: 180px;
+        flex: 0 0 auto;
+        animation: cardiogram-drift 8s linear infinite;
+    }
+    .cardiogram path {
+        fill: none;
+        stroke: #FFFFFF;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2.5;
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.75));
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: cardiogram-draw 8s linear infinite,
+            cardiogram-pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes cardiogram-draw {
+        0% { stroke-dashoffset: 1; }
+        48%, 100% { stroke-dashoffset: 0; }
+    }
+    @keyframes cardiogram-drift {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+    @keyframes cardiogram-pulse {
+        0%, 52%, 100% {
+            opacity: 0.72;
+            transform: scaleY(1);
+        }
+        58% {
+            opacity: 1;
+            transform: scaleY(1.08);
+        }
+        64% {
+            opacity: 0.82;
+            transform: scaleY(0.98);
+        }
+        72% {
+            opacity: 1;
+            transform: scaleY(1.05);
+        }
+        82% {
+            opacity: 0.72;
+            transform: scaleY(1);
+        }
+    }
     [data-testid="stHeader"] {
         background-color: #880808;
         color: white;    
@@ -164,6 +231,16 @@ st.markdown(
     }
     
     </style>
+    """,
+    unsafe_allow_html=True,
+)
+st.markdown(
+    """
+    <div class="cardiogram" aria-hidden="true">
+        <svg viewBox="0 0 1600 180" preserveAspectRatio="none">
+            <path pathLength="1" d="M0 128 H108 L137 126 L160 132 L188 124 H274 L301 124 L321 113 L337 145 L354 125 H414 L438 126 L459 119 L481 134 L500 124 H584 L610 124 L631 104 L648 151 L666 125 H726 L750 127 L772 116 L789 139 L808 124 H884 L910 125 L931 74 L949 158 L968 124 H1021 L1045 126 L1065 110 L1082 143 L1101 125 H1179 L1204 126 L1228 102 L1245 149 L1262 125 H1340 L1365 126 L1384 116 L1401 136 L1421 124 H1494 L1518 126 L1540 94 L1557 153 L1575 125 H1600" />
+        </svg>
+    </div>
     """,
     unsafe_allow_html=True,
 )
